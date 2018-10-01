@@ -1,0 +1,42 @@
+.tile-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100px;
+  height: 100px;
+  border-radius: 0.4rem;
+  background-color: #DDD;
+}
+
+.tile-view.blocked {
+  background-color: gray;
+}
+
+.tile-view.focused {
+  border: 3px solid brown;
+}
+
+.tile-view.in-open-list {
+  background-color: orange;
+}
+
+.tile-view.in-closed-list {
+  background-color: red;
+}
+
+.tile-view > .tile-label {
+  margin: 0;
+  font-size: 1.4rem;
+  user-select: none;
+  z-index: 1; /* Bring labels above the path view */
+}
+
+.tile-view > .start, .tile-view > .end {
+  color: black;
+}
+
+.tile-view > .weight {
+  color: rgba(0, 0, 0, 0.3);
+}

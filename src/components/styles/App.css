@@ -1,0 +1,23 @@
+header {
+  padding: 1rem 2rem;
+  color: white;
+  background: #9c0000;
+}
+
+section {
+  width: 100vw;
+  padding: 1rem 2rem;
+}
+
+section.tile-setting, section.grid-container, section.metrics {
+  border-top: 2px solid #EEE;
+}
+
+button {
+  padding: 0.4rem 1rem;
+  border: none;
+  border-radius: 0.4rem !important;
+  color: white;
+  background-color: #d7564e;
+  cursor: pointer;
+}

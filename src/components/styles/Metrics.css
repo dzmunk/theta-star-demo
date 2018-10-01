@@ -1,0 +1,11 @@
+.metrics-table {
+  border-collapse: collapse;
+}
+
+.metrics-table > tbody > tr > td {
+  padding: 0.4rem 1rem;
+}
+
+.metrics-table > tbody > tr:not(:first-child) > td {
+  border-top: 1px solid #EEE;
+}

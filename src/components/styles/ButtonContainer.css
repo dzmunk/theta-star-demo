@@ -1,0 +1,11 @@
+.buttons {
+  display: flex;
+}
+
+.buttons > button:not(:first-child) {
+  margin-left: 1rem;
+}
+
+.error-message {
+  color: red;
+}
