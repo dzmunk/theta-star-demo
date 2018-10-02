@@ -3,8 +3,7 @@ import './styles/Metrics.css';
 
 interface MetricsProps {
   cost: number | null;
-  distance: number | null;
-  tilesInPathCount: number | null;
+  distance: number | null
   openListLength: number | null;
   closedListLength: number | null;
 }
@@ -23,10 +22,6 @@ class Metrics extends React.Component<MetricsProps> {
             <tr>
               <td>Total distance</td>
               <td>{this.props.distance === null ? '-' : this.props.distance.toFixed(4)}</td>
-            </tr>
-            <tr>
-              <td>Number of cells stepped on</td>
-              <td>{this.props.tilesInPathCount === null ? '-' : this.props.tilesInPathCount}</td>
             </tr>
             <tr>
               <td>Number of cells left in the open list (queue)</td>

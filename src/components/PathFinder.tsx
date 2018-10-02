@@ -172,7 +172,6 @@ class PathFinder extends React.Component<{}, PathFinderState> {
         <Metrics
           cost={this.state.cost}
           distance={this.state.distance}
-          tilesInPathCount={this.state.cost ? this.state.tilesInPath.length : null}
           openListLength={this.state.cost ? this.state.tilesInOpenList.length : null}
           closedListLength={this.state.cost ? this.state.tilesInClosedList.length : null} />
       </>

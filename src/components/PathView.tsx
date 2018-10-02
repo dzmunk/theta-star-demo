@@ -20,7 +20,6 @@ class PathView extends React.Component<PathViewProps> {
   private canvasRef = React.createRef<HTMLCanvasElement>();
 
   private drawPath(context: CanvasRenderingContext2D, startTile: Tile, tilesInPath: Tile[], tileSize: number, gapSize: number) {
-    console.log('draw path');
     const tileToCanvasCoordinate = (tile: Tile): [number, number] => {
       return [
         (tileSize + gapSize) * tile.x + tileSize / 2,
@@ -58,12 +57,12 @@ class PathView extends React.Component<PathViewProps> {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
   }
 
-  private redraw(startTile: Tile | null, tilesInPath: Tile[], tileSize: number, gapSize: number) {
-    console.log('redraw');
+  private redraw(startTile: Tile | null, tilesInPath: Tile[], tileSize: number, gapSize: number, isNewCanvas: boolean) {
     const canvas: HTMLCanvasElement | null = this.canvasRef.current;
     if (!canvas) return;
     const context = canvas.getContext('2d');
     if (!context) return;
+    isNewCanvas && context.scale(2, 2); // Adjust the scale only when the canvas is newly created (because multiple scale()s accumulate)
 
     this.clearCanvas(context);
     if (startTile && tilesInPath.length !== 0) {
@@ -72,13 +71,13 @@ class PathView extends React.Component<PathViewProps> {
   }
 
   public componentDidMount() {
-    this.redraw(this.props.startTile, this.props.tilesInPath, this.props.tileSize, this.props.gapSize);
+    this.redraw(this.props.startTile, this.props.tilesInPath, this.props.tileSize, this.props.gapSize, true);
   }
 
   public shouldComponentUpdate(nextProps: PathViewProps) {
     if (this.props.gridWidth === nextProps.gridWidth && this.props.gridHeight === nextProps.gridHeight) {
       if (this.props.startTile !== nextProps.startTile || !arrayEqual(this.props.tilesInPath, nextProps.tilesInPath)) { // Redraw only when the path is different
-        this.redraw(nextProps.startTile, nextProps.tilesInPath, nextProps.tileSize, nextProps.gapSize);
+        this.redraw(nextProps.startTile, nextProps.tilesInPath, nextProps.tileSize, nextProps.gapSize, false);
       }
       return false;
     } else {
@@ -87,14 +86,18 @@ class PathView extends React.Component<PathViewProps> {
   }
 
   public componentDidUpdate() {
-    this.redraw(this.props.startTile, this.props.tilesInPath, this.props.tileSize, this.props.gapSize);
+    this.redraw(this.props.startTile, this.props.tilesInPath, this.props.tileSize, this.props.gapSize, true);
   }
 
   public render() {
     return (
       <canvas
         className="path-view" ref={this.canvasRef}
-        width={this.props.gridWidth} height={this.props.gridHeight} />
+        width={this.props.gridWidth * 2} height={this.props.gridHeight * 2}
+        style={{
+          width: `${this.props.gridWidth}px`,
+          height: `${this.props.gridHeight}px`
+        }} />
     );
   }
 }

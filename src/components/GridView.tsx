@@ -17,12 +17,7 @@ interface GridViewProps {
 }
 
 class GridView extends React.Component<GridViewProps> {
-  private setGridLayout() {
-    // TODO: Change the CSS Grid layout
-  }
-
   public render() {
-    this.setGridLayout();
     return (
       <div
         className="grid-view"

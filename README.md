@@ -1,6 +1,11 @@
 # Todo
 
-`as T` to TypeScript's non-null assertion (`!`)
+- `as T` to TypeScript's non-null assertion (`!`)
+- Text fields with range constraints
+- Setting a tile as both start and end causes an error
+- Grid sizing
+- Design (error message, tile and path colors, space between fields)
+- Smartphones
 
 # Component Structure
 
@@ -23,7 +28,6 @@
       <Metrics>
         Cumulative cost
         Total distance
-        Number of cells stepped on
         Number of cells left in the open list
         Number of cells in the closed list
 ```
