@@ -1,32 +1,33 @@
-# Todo
+This website demonstrates how Theta* algorithm of my implementation (might have bugs) behaves.
 
-- `as T` to TypeScript's non-null assertion (`!`)
-- Favicon, header
-- Grid sizing
-- Smartphones
-- Embed
+# 1. Configure the grid size
 
-# Component Structure
+The number of columns/rows must be from 1 to 50.
 
-```xml
-<App>
-  <header>
-  <main>
-    <PathFinder>
-      <GridSetting>
-      <TileSetting>
-      <GridContainer>
-        <div> grid-path-coordinator
-          <GridView>
-            <TileView> x ?
-          <PathView>
-      <ButtonContainer>
-        Start
-        Clear path
-        Reset tiles
-      <Metrics>
-        Cumulative cost
-        Total distance
-        Number of cells left in the open list
-        Number of cells in the closed list
-```
+# 2. Configure individual cells
+
+Click on the cell to configure. The configuration options include:
+
+- Set as start: The path starts from the cell.
+
+- Set as end: The cell becomes the destination of the path.
+
+- Block this cell: Block the cell so that the path cannot pass through it.
+
+- Weight: Defines how much cost/effort you need to pass through the cell. Must be positive and <= 1000.
+
+# 3. Start pathfinding
+
+Click on the start button. The path found by the algorithm will be displayed as a white line.
+
+# 4. Check the metrics
+
+Four metrics are provided:
+
+- Cumulative cost: G of the last cell.
+
+- Total distance
+
+- Number of cells left in the open list
+
+- Number of cells in the closed list
