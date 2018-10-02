@@ -6,7 +6,7 @@ interface NumberInputWithRangeLimitProps {
   max: number;
   step: number;
   defaultInput: string;
-  style: React.CSSProperties;
+  style?: React.CSSProperties;
   fieldWidth: string;
   handleChange: (newInput: string) => void;
 }

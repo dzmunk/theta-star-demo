@@ -1,0 +1,23 @@
+.tile-legend-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 0;
+}
+
+.tile-legend-container > div {
+  display: flex;
+  align-items: center;
+}
+
+.tile-legend-container > div:not(:last-child) {
+  margin-right: 0.6rem;
+}
+
+.tile-legend {
+  min-width: 1rem;
+  min-height: 1rem;
+  margin-right: 0.2rem;
+  border-radius: 50%;
+}
+
+/* Individual legend's colors are defined in TileView.css */

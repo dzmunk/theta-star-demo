@@ -2,8 +2,9 @@
 
 - `as T` to TypeScript's non-null assertion (`!`)
 - Grid sizing
-- Design (error message, tile and path colors, space between fields)
+- Design (error message)
 - Smartphones
+- Embed
 
 # Component Structure
 

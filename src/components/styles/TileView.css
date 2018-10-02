@@ -7,23 +7,26 @@
   width: 100px;
   height: 100px;
   border-radius: 0.4rem;
-  background-color: #DDD;
 }
 
-.tile-view.blocked {
-  background-color: gray;
+.tile-view, .tile-legend.plain {
+  background-color: #EEE;
+}
+
+.tile-view.blocked, .tile-legend.blocked {
+  background-color: #AAA;
 }
 
 .tile-view.focused {
-  border: 3px solid brown;
+  border: 0.3rem solid #982649;
 }
 
-.tile-view.in-open-list {
-  background-color: orange;
+.tile-view.in-open-list, .tile-legend.in-open-list {
+  background-color: #9CD8C8;
 }
 
-.tile-view.in-closed-list {
-  background-color: red;
+.tile-view.in-closed-list, .tile-legend.in-closed-list {
+  background-color: #7EB2DD;
 }
 
 .tile-view > .tile-label {
@@ -38,5 +41,5 @@
 }
 
 .tile-view > .weight {
-  color: rgba(0, 0, 0, 0.3);
+  color: rgba(0, 0, 0, 0.5);
 }

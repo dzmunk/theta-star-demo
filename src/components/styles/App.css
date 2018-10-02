@@ -1,7 +1,12 @@
 header {
   padding: 1rem 2rem;
   color: white;
-  background: #9c0000;
+  background: #333;
+}
+
+header > h1 {
+  font-size: 1rem;
+  margin: 0;
 }
 
 section {
@@ -20,4 +25,29 @@ button {
   color: white;
   background-color: #d7564e;
   cursor: pointer;
+}
+
+input {
+  padding: 0.1rem 0.2rem;
+  border: none;
+  background-color: #EEE;
+  border-radius: 0.2rem;
+}
+
+label.setting {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+}
+
+label.setting:not(:last-child) {
+  margin-right: 0.8rem;
+}
+
+label.setting > * {
+  margin: 0;
+}
+
+label.setting > *:not(:first-child) {
+  margin-left: 0.3rem;
 }

@@ -1,3 +1,7 @@
+.grid-container {
+  overflow-x: scroll;
+}
+
 .grid-path-coordinator {
   position: relative;
 }

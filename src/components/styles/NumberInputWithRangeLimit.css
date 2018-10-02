@@ -2,6 +2,7 @@
   display: inline-flex;
   flex-direction: column;
   align-items: flex-end;
+  margin-bottom: -0.5rem !important; /* To align only the input element */
 }
 
 .number-input-with-range-limit > p {

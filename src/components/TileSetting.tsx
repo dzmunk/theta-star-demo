@@ -77,33 +77,30 @@ class TileSetting extends React.Component<TileSettingProps, TileSettingState> {
       return (
         <section className="tile-setting">
           <h2>Cell Settings ({this.props.tile.x}, {this.props.tile.y})</h2>
-          <label>
+          <label className="setting">
             <input
               type="checkbox" checked={this.props.isStart}
               onChange={event => this.handleSetStart(event.target.checked)} />
-            Set as start
+            <p>Set as start</p>
           </label>
-          <label>
+          <label className="setting">
             <input
               type="checkbox" checked={this.props.isEnd}
               onChange={event => this.handleSetEnd(event.target.checked)} />
-            Set as end
+            <p>Set as end</p>
           </label>
-          <label>
+          <label className="setting">
             <input
               type="checkbox" checked={this.props.tile.isBlocked}
               onChange={event => this.handleSetIsBlocked(event.target.checked)} />
-            Block this cell
+            <p>Block this cell</p>
           </label>
-          <label>
-            Weight:
+          <label className="setting">
+            <p>Weight:</p>
             <NumberInputWithRangeLimit
               min={MIN_TILE_WEIGHT} max={MAX_TILE_WEIGHT} step={1}
               defaultInput={this.state.inputWeight}
-              style={{
-                margin: '0 0.5rem'
-              }}
-              fieldWidth="5rem"
+              fieldWidth="4rem"
               handleChange={newInput => this.handleWeightChange(newInput)} />
           </label>
         </section>

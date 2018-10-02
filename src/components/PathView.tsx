@@ -36,7 +36,7 @@ class PathView extends React.Component<PathViewProps> {
       const [x, y] = tileToCanvasCoordinate(tile); // TODO: In the future, we'll be able to use spread operator in the argument list
       context.arc(
         x, y, // Coordinate
-        tileSize / 6, // Radius
+        tileSize / 10, // Radius
         0, 2 * Math.PI // Angle
       );
       context.closePath();
@@ -49,7 +49,7 @@ class PathView extends React.Component<PathViewProps> {
     for (const tile of tilesInPath) {
       context.lineTo(...tileToCanvasCoordinate(tile));
     }
-    context.lineWidth = tileSize / 10;
+    context.lineWidth = tileSize / 20;
     context.stroke();
   }
 

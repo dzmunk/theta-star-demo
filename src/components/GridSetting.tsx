@@ -57,27 +57,20 @@ class GridSetting extends React.Component<GridSettingProps, GridSettingState> {
       <section className="grid-setting">
         <h2>Grid Settings</h2>
         <span>Grid size: </span>
-        <label>
-          x
+        <label className="setting">
+          <p>X</p>
           <NumberInputWithRangeLimit
             min={MIN_GRID_SIZE} max={MAX_GRID_SIZE} step={1}
             defaultInput={this.state.inputXSize}
-            style={{
-              margin: '0 1rem'
-            }}
-            fieldWidth="5rem"
+            fieldWidth="3rem"
             handleChange={newInput => this.handleXSizeChange(newInput)} />
         </label>
-        ×
-        <label>
-          y
+        <label className="setting">
+          <p>Y</p>
           <NumberInputWithRangeLimit
             min={MIN_GRID_SIZE} max={MAX_GRID_SIZE} step={1}
             defaultInput={this.state.inputYSize}
-            style={{
-              margin: '0 1rem'
-            }}
-            fieldWidth="5rem"
+            fieldWidth="3rem"
             handleChange={newInput => this.handleYSizeChange(newInput)} />
         </label>
         <button onClick={this.handleConfirm}>Confirm</button>

@@ -6,6 +6,7 @@ import { ThetaStar } from '../pathfinding/ThetaStar';
 import GridSetting from './GridSetting';
 import TileSetting from './TileSetting';
 import GridContainer from './GridContainer';
+import TileLegend from './TileLegend';
 import ButtonContainer from './ButtonContainer';
 import Metrics from './Metrics';
 
@@ -24,6 +25,13 @@ interface PathFinderState {
 
 class PathFinder extends React.Component<{}, PathFinderState> {
   private thetaStar: ThetaStar;
+  private emptyPathState = {
+    cost: null,
+    distance: null,
+    tilesInPath: [],
+    tilesInOpenList: [],
+    tilesInClosedList: []
+  };
 
   constructor(props: {}) {
     super(props);
@@ -34,11 +42,7 @@ class PathFinder extends React.Component<{}, PathFinderState> {
       startTile: grid.tileAt(0, 0),
       endTile: grid.tileAt(2, 2),
       focusedTile: null,
-      tilesInPath: [],
-      tilesInOpenList: [],
-      tilesInClosedList: [],
-      cost: null,
-      distance: null,
+      ...this.emptyPathState,
       errorMessage: null
     };
   }
@@ -68,11 +72,7 @@ class PathFinder extends React.Component<{}, PathFinderState> {
       startTile: getCorrespondingTileInGrid(this.state.startTile, newGrid),
       endTile: getCorrespondingTileInGrid(this.state.endTile, newGrid),
       focusedTile: getCorrespondingTileInGrid(this.state.focusedTile, newGrid),
-      tilesInPath: [],
-      tilesInOpenList: [],
-      tilesInClosedList: [],
-      cost: null,
-      distance: null,
+      ...this.emptyPathState,
       errorMessage: null
     });
   }
@@ -96,44 +96,40 @@ class PathFinder extends React.Component<{}, PathFinderState> {
   }
   
   private handleStart = () => {
+    const resetPathAndShowError = (errorMessage: string) => {
+      this.setState({
+        ...this.emptyPathState,
+        errorMessage
+      });
+    };
+
     if (!(this.state.startTile && this.state.endTile)) {
-      this.setState({errorMessage: 'Either start or end cell is missing'});
+      resetPathAndShowError('Either start or end cell is missing');
       return;
     }
     if (this.state.startTile === this.state.endTile) {
-      this.setState({errorMessage: 'Start cell and end cell must not be the same'});
+      resetPathAndShowError('Start cell and end cell must not be the same');
       return;
     }
     this.thetaStar = new ThetaStar(this.state.grid);
     const result = this.thetaStar.navigate(this.state.startTile, this.state.endTile);
     if (result.tilesInPath.length === 0) { // No path found
-      this.setState({
-        cost: null,
-        distance: null,
-        tilesInPath: [],
-        tilesInOpenList: [],
-        tilesInClosedList: [],
-        errorMessage: 'Could not find any path'
-      });
-    } else {
-      this.setState({
-        cost: result.cost,
-        distance: result.distance,
-        tilesInPath: result.tilesInPath,
-        tilesInOpenList: result.tilesInOpenList,
-        tilesInClosedList: result.tilesInClosedList,
-        errorMessage: null
-      })
+      resetPathAndShowError('Could not find any path');
+      return;
     }
+    this.setState({
+      cost: result.cost,
+      distance: result.distance,
+      tilesInPath: result.tilesInPath,
+      tilesInOpenList: result.tilesInOpenList,
+      tilesInClosedList: result.tilesInClosedList,
+      errorMessage: null
+    });
   }
 
   private handleClearPath = () => {
     this.setState({
-      cost: null,
-      distance: null,
-      tilesInPath: [],
-      tilesInOpenList: [],
-      tilesInClosedList: [],
+      ...this.emptyPathState,
       errorMessage: null
     });
   }
@@ -168,6 +164,11 @@ class PathFinder extends React.Component<{}, PathFinderState> {
           tilesInOpenList={this.state.tilesInOpenList}
           tilesInClosedList={this.state.tilesInClosedList}
           focusTile={this.focusTile} />
+        <TileLegend
+          doesBlockedTileExist={this.state.grid.tiles.reduce((accumulator, currentValue) => {
+            return accumulator || currentValue.some((tile: Tile) => tile.isBlocked);
+          }, false)}
+          isPathVisible={this.state.tilesInPath.length > 0} />
         <ButtonContainer
           handleStart={this.handleStart}
           handleClearPath={this.handleClearPath}
