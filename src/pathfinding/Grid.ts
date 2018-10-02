@@ -28,7 +28,7 @@ export class Tile {
       .map((key: any) => Direction[key] as any)
       .filter((value: any) => typeof value === 'number')
       .forEach((key: number) => {
-        this.neighbors.has(key) && neighborList.push(this.neighbors.get(key) as Tile);
+        this.neighbors.has(key) && neighborList.push(this.neighbors.get(key)!);
       });
     return neighborList;
   }

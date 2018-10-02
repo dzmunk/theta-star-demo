@@ -36,10 +36,10 @@ export class PathTile {
   public calculateCumulativeWeight(parent: PathTile | null): number {
     /* Parent can be injected so that we can simulate cumulative weights
     to compare the efficiency of multiple paths */
-    if (!this.parent) return 0;
+    if (!parent) return 0;
     return (
-      (parent as PathTile).cumulativeWeight
-        + Grid.squaredDistanceBetween((parent as PathTile).tile, this.tile)
+      parent.cumulativeWeight
+        + Grid.squaredDistanceBetween(parent.tile, this.tile)
         + this.tile.weight // TODO: Or take the difference of weights?
     );
   }
@@ -47,8 +47,8 @@ export class PathTile {
   public calculateAnyAngleCumulativeWeight(parent: PathTile | null, lineTiles: Tile[]): number {
     /* lineTiles are tiles between the parent and this. It does not include the parent
     but does include this tile. */
-    if (!this.parent) return 0;
-    let cumulativeWeight = (parent as PathTile).cumulativeWeight + Grid.squaredDistanceBetween((parent as PathTile).tile, this.tile);
+    if (!parent) return 0;
+    let cumulativeWeight = parent.cumulativeWeight + Grid.squaredDistanceBetween(parent.tile, this.tile);
     for (const tile of lineTiles) {
       cumulativeWeight += tile.weight; // TODO: Do something
     }
@@ -79,7 +79,7 @@ export class AStar { // returns an array of Tiles for the character to navigate.
     let current: PathTile;
     
     while (!queue.isEmpty()) {
-      current = queue.dequeue() as PathTile;
+      current = queue.dequeue()!;
       searched.push(current);
       
       if (current.tile === end) {
@@ -104,13 +104,13 @@ export class AStar { // returns an array of Tiles for the character to navigate.
         
         const indexInQueue = queue.find((pathTile: PathTile) => pathTile.tile === neighbor);
         if (indexInQueue > 0) { /* If the queue contains the neighbor */
-          const updated = this.updatePathTile(current, neighbor, queue.elementAt(indexInQueue) as PathTile);
+          const updated = this.updatePathTile(current, neighbor, queue.elementAt(indexInQueue)!);
           updated && queue.notifyUpdate(indexInQueue);
         } else {
           // TODO: やばいきたない
           queue.enqueue(new PathTile(neighbor, current, end));
           const indexInQueueue = queue.find((pathTile: PathTile) => pathTile.tile === neighbor);
-          const updated = this.updatePathTile(current, neighbor, queue.elementAt(indexInQueueue) as PathTile);
+          const updated = this.updatePathTile(current, neighbor, queue.elementAt(indexInQueueue)!);
           updated && queue.notifyUpdate(indexInQueueue);
         }
       }

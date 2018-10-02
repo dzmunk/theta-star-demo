@@ -112,7 +112,7 @@ export default class BinaryMinHeap<T> {
   public find(condition: (node: T) => boolean): number {
     /* Returns the index of a node that fulfills the given condition */
     for (let i = 1; i <= this.size; i++) {
-      if (condition(this.nodes[i] as T)) {
+      if (condition(this.nodes[i]!)) {
         return i;
       }
     }

@@ -1,6 +1,5 @@
 # Todo
 
-- `as T` to TypeScript's non-null assertion (`!`)
 - Smartphones
 - Embed
 
