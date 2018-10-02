@@ -1,10 +1,12 @@
-This website demonstrates how Theta* algorithm of my implementation (might have bugs) behaves.
+This website demonstrates how [Theta* algorithm](http://aigamedev.com/open/tutorials/theta-star-any-angle-paths/) of my implementation (might have bugs) behaves.
 
-# 1. Configure the grid size
+## 1. Configure the grid size
 
 The number of columns/rows must be from 1 to 50.
 
-# 2. Configure individual cells
+<img width="400" src="https://github.com/shio-yaamaa/theta-star-demo/blob/master/doc-images/grid-settings.png" />
+
+## 2. Configure individual cells
 
 Click on the cell to configure. The configuration options include:
 
@@ -16,11 +18,15 @@ Click on the cell to configure. The configuration options include:
 
 - Weight: Defines how much cost/effort you need to pass through the cell. Must be positive and <= 1000.
 
-# 3. Start pathfinding
+<img width="400" src="https://github.com/shio-yaamaa/theta-star-demo/blob/master/doc-images/cell-settings.png" />
+
+## 3. Start pathfinding
 
 Click on the start button. The path found by the algorithm will be displayed as a white line.
 
-# 4. Check the metrics
+<img width="400" src="https://github.com/shio-yaamaa/theta-star-demo/blob/master/doc-images/path.png" />
+
+## 4. Check the metrics
 
 Four metrics are provided:
 
