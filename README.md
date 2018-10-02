@@ -1,4 +1,4 @@
-This website demonstrates how [Theta* algorithm](http://aigamedev.com/open/tutorials/theta-star-any-angle-paths/) of my implementation (might have bugs) behaves.
+[This website](https://shio-yaamaa.github.io/theta-star-demo/) demonstrates how [Theta* algorithm](http://aigamedev.com/open/tutorials/theta-star-any-angle-paths/) of my implementation (might have bugs) behaves.
 
 ## 1. Configure the grid size
 
