@@ -1,8 +1,6 @@
 # Todo
 
 - `as T` to TypeScript's non-null assertion (`!`)
-- Text fields with range constraints
-- Setting a tile as both start and end causes an error
 - Grid sizing
 - Design (error message, tile and path colors, space between fields)
 - Smartphones

@@ -2,6 +2,7 @@ import * as React from 'react';
 import './styles/TileSetting.css';
 
 import { Tile } from '../pathfinding/Grid';
+import NumberInputWithRangeLimit from './NumberInputWithRangeLimit';
 
 const MIN_TILE_WEIGHT = 0;
 const MAX_TILE_WEIGHT = 1000;
@@ -69,7 +70,6 @@ class TileSetting extends React.Component<TileSettingProps, TileSettingState> {
       inputWeight: newInputWeight === '' ? '' : newWeight.toString(),
       ignoreNextWeightUpdate: true
     });
-    // this.props.updateWeightGradient();
   }
 
   public render() {
@@ -97,9 +97,14 @@ class TileSetting extends React.Component<TileSettingProps, TileSettingState> {
           </label>
           <label>
             Weight:
-            <input
-              type="number" min={MIN_TILE_WEIGHT} max={MAX_TILE_WEIGHT} value={this.state.inputWeight}
-              onChange={event => this.handleWeightChange(event.target.value)} />
+            <NumberInputWithRangeLimit
+              min={MIN_TILE_WEIGHT} max={MAX_TILE_WEIGHT} step={1}
+              defaultInput={this.state.inputWeight}
+              style={{
+                margin: '0 0.5rem'
+              }}
+              fieldWidth="5rem"
+              handleChange={newInput => this.handleWeightChange(newInput)} />
           </label>
         </section>
       );

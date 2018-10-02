@@ -1,6 +1,8 @@
 import * as React from 'react';
 import './styles/GridSetting.css';
 
+import NumberInputWithRangeLimit from './NumberInputWithRangeLimit';
+
 const MIN_GRID_SIZE = 1;
 const MAX_GRID_SIZE = 50;
 
@@ -57,21 +59,28 @@ class GridSetting extends React.Component<GridSettingProps, GridSettingState> {
         <span>Grid size: </span>
         <label>
           x
-          <input
-            className="grid-size-input" type="number" min={MIN_GRID_SIZE} max={MAX_GRID_SIZE}  step="1"
-            value={this.state.inputXSize}
-            onChange={event => this.handleXSizeChange(event.target.value)} />
+          <NumberInputWithRangeLimit
+            min={MIN_GRID_SIZE} max={MAX_GRID_SIZE} step={1}
+            defaultInput={this.state.inputXSize}
+            style={{
+              margin: '0 1rem'
+            }}
+            fieldWidth="5rem"
+            handleChange={newInput => this.handleXSizeChange(newInput)} />
         </label>
         ×
         <label>
           y
-          <input
-            className="grid-size-input" type="number" min={MIN_GRID_SIZE} max={MAX_GRID_SIZE} step="1"
-            value={this.state.inputYSize}
-            onChange={event => this.handleYSizeChange(event.target.value)} />
+          <NumberInputWithRangeLimit
+            min={MIN_GRID_SIZE} max={MAX_GRID_SIZE} step={1}
+            defaultInput={this.state.inputYSize}
+            style={{
+              margin: '0 1rem'
+            }}
+            fieldWidth="5rem"
+            handleChange={newInput => this.handleYSizeChange(newInput)} />
         </label>
         <button onClick={this.handleConfirm}>Confirm</button>
-        <p>Grid size must be from 1 to 50</p>
       </section>
     );
   }

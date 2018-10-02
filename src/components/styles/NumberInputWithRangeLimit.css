@@ -1,0 +1,11 @@
+.number-input-with-range-limit {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.number-input-with-range-limit > p {
+  margin: 0;
+  font-size: 0.5rem;
+  color: gray;
+}

@@ -100,6 +100,10 @@ class PathFinder extends React.Component<{}, PathFinderState> {
       this.setState({errorMessage: 'Either start or end cell is missing'});
       return;
     }
+    if (this.state.startTile === this.state.endTile) {
+      this.setState({errorMessage: 'Start cell and end cell must not be the same'});
+      return;
+    }
     this.thetaStar = new ThetaStar(this.state.grid);
     const result = this.thetaStar.navigate(this.state.startTile, this.state.endTile);
     if (result.tilesInPath.length === 0) { // No path found
