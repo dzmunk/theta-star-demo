@@ -1,8 +1,8 @@
 # Todo
 
 - `as T` to TypeScript's non-null assertion (`!`)
+- Favicon, header
 - Grid sizing
-- Design (error message)
 - Smartphones
 - Embed
 

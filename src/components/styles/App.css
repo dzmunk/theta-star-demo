@@ -40,6 +40,12 @@ label.setting {
   margin: 0;
 }
 
+@media (max-width: 480px) {
+  label.setting {
+    display: flex;
+  }
+}
+
 label.setting:not(:last-child) {
   margin-right: 0.8rem;
 }

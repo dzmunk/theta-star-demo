@@ -1,10 +1,15 @@
 import * as React from 'react';
 import './styles/GridContainer.css';
 
+import { MIN_GRID_SIZE, MAX_GRID_SIZE } from './GridSetting';
+
 import { Tile, Grid } from '../pathfinding/Grid';
 
 import GridView from './GridView';
 import PathView from './PathView';
+
+const MIN_TILE_SIZE = 60; // Corresponds to MAX_GRID_SIZE
+const MAX_TILE_SIZE = 100; // Corresponds to MIN_GRID_SIZE
 
 interface GridContainerProps {
   grid: Grid;
@@ -19,8 +24,10 @@ interface GridContainerProps {
 
 class GridContainer extends React.Component<GridContainerProps> {
   private calculateGridDimensions(grid: Grid) {
-    const tileSize = 100;
-    const gapSize = 2;
+    const biggerGridSize = Math.max(grid.x, grid.y);
+    const tileSize = (MIN_TILE_SIZE - MAX_TILE_SIZE) / (MAX_GRID_SIZE - MIN_GRID_SIZE)
+      * (biggerGridSize - 1) + MAX_TILE_SIZE; // Equation given two points: (MIN_GRID_SIZE, MAX_TILE_SIZE), (MAX_GRID_SIZE, MIN_TILE_SIZE)
+    const gapSize = Math.max(tileSize / 50, 1);
     return {
       gridWidth: tileSize * grid.x + gapSize * (grid.x - 1),
       gridHeight: tileSize * grid.y + gapSize * (grid.y - 1),

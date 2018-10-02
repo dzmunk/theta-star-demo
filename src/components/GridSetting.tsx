@@ -3,8 +3,9 @@ import './styles/GridSetting.css';
 
 import NumberInputWithRangeLimit from './NumberInputWithRangeLimit';
 
-const MIN_GRID_SIZE = 1;
-const MAX_GRID_SIZE = 50;
+// These constants are exported to calculate the tile size in GridContainer.tsx
+export const MIN_GRID_SIZE = 1;
+export const MAX_GRID_SIZE = 50;
 
 interface GridSettingProps {
   xSize: number;
@@ -56,9 +57,8 @@ class GridSetting extends React.Component<GridSettingProps, GridSettingState> {
     return (
       <section className="grid-setting">
         <h2>Grid Settings</h2>
-        <span>Grid size: </span>
         <label className="setting">
-          <p>X</p>
+          <p>Number of columns:</p>
           <NumberInputWithRangeLimit
             min={MIN_GRID_SIZE} max={MAX_GRID_SIZE} step={1}
             defaultInput={this.state.inputXSize}
@@ -66,7 +66,7 @@ class GridSetting extends React.Component<GridSettingProps, GridSettingState> {
             handleChange={newInput => this.handleXSizeChange(newInput)} />
         </label>
         <label className="setting">
-          <p>Y</p>
+          <p>Number of rows:</p>
           <NumberInputWithRangeLimit
             min={MIN_GRID_SIZE} max={MAX_GRID_SIZE} step={1}
             defaultInput={this.state.inputYSize}

@@ -37,6 +37,7 @@ class GridView extends React.Component<GridViewProps> {
                 isEnd={tile === this.props.endTile}
                 isInOpenList={this.props.tilesInOpenList.includes(tile)}
                 isInClosedList={this.props.tilesInClosedList.includes(tile)}
+                tileSize={this.props.tileSize}
                 focusTile={this.props.focusTile} />
             );
           })

@@ -10,6 +10,7 @@ interface TileViewProps {
   isEnd: boolean;
   isInOpenList: boolean;
   isInClosedList: boolean;
+  tileSize: number;
   focusTile: (tile: Tile) => void;
 }
 
@@ -29,14 +30,22 @@ class TileView extends React.Component<TileViewProps> {
         classNames.push('in-open-list');
       }
     }
+    const labelFontSize = this.props.tileSize / 5; // Can't do it with CSS "%"
 
     return (
       <div
         className={classNames.join(' ')}
+        style={{
+          width: `${this.props.tileSize}px`,
+          height: `${this.props.tileSize}px`
+        }}
         onClick={this.handleClick}>
-        {this.props.isStart && <p className="tile-label start">START</p>}
-        {this.props.isEnd && <p className="tile-label end">END</p>}
-        {this.props.tile.weight !== 0 && !this.props.tile.isBlocked && <p className="tile-label weight">{this.props.tile.weight}</p>}
+        {this.props.isStart &&
+          <p className="tile-label start" style={{fontSize: `${labelFontSize}px`}}>START</p>}
+        {this.props.isEnd &&
+          <p className="tile-label end" style={{fontSize: `${labelFontSize}px`}}>END</p>}
+        {this.props.tile.weight !== 0 && !this.props.tile.isBlocked &&
+          <p className="tile-label weight" style={{fontSize: `${labelFontSize}px`}}>{this.props.tile.weight}</p>}
       </div>
     );
   }
