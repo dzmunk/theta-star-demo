@@ -1,6 +1,6 @@
 export enum Direction {
-  West, East, North, South
-  /*Northwest, Northeast, Southwest, Southeast*/
+  West, East, North, South,
+  Northwest, Northeast, Southwest, Southeast
 }
 
 type Neighbors = Map<Direction, Tile>;
@@ -84,31 +84,30 @@ export class Grid {
       tile.neighbors.set(Direction.North, this.tileAt(tile.x, tile.y - 1));
     }
     // Northwest
-    // if (tile.neighbors.has(Direction.West) && tile.neighbors.has(Direction.North)) {
-    //   tile.neighbors.set(Direction.Northwest, this.tileAt(tile.x - 1, tile.y - 1));
-    // }
+    if (tile.neighbors.has(Direction.West) && tile.neighbors.has(Direction.North)) {
+      tile.neighbors.set(Direction.Northwest, this.tileAt(tile.x - 1, tile.y - 1));
+    }
     // Northeast
-    // if (tile.neighbors.has(Direction.East) && tile.neighbors.has(Direction.North)) {
-    //   tile.neighbors.set(Direction.Northeast, this.tileAt(tile.x + 1, tile.y - 1));
-    // }
+    if (tile.neighbors.has(Direction.East) && tile.neighbors.has(Direction.North)) {
+      tile.neighbors.set(Direction.Northeast, this.tileAt(tile.x + 1, tile.y - 1));
+    }
     // South
     if (tile.y + 1 < this.y) {
       tile.neighbors.set(Direction.South, this.tileAt(tile.x, tile.y + 1));
     }
     // Southwest
-    // if (tile.neighbors.has(Direction.West) && tile.neighbors.has(Direction.South)) {
-    //   tile.neighbors.set(Direction.Southwest, this.tileAt(tile.x - 1, tile.y + 1));
-    // }
+    if (tile.neighbors.has(Direction.West) && tile.neighbors.has(Direction.South)) {
+      tile.neighbors.set(Direction.Southwest, this.tileAt(tile.x - 1, tile.y + 1));
+    }
     // Southeast
-    // if (tile.neighbors.has(Direction.East) && tile.neighbors.has(Direction.South)) {
-    //   tile.neighbors.set(Direction.Southeast, this.tileAt(tile.x + 1, tile.y + 1));
-    // }
+    if (tile.neighbors.has(Direction.East) && tile.neighbors.has(Direction.South)) {
+      tile.neighbors.set(Direction.Southeast, this.tileAt(tile.x + 1, tile.y + 1));
+    }
   }
   
   public static squaredDistanceBetween(a: Tile, b: Tile) {
     /* Calculates the distance between two tiles. Does not take the square root
     in order to make the calculation more efficient. */
-    // TODO: Take the square root to give advantage to diagonal moves
     return Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2);
   }
   

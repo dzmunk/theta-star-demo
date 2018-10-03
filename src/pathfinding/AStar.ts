@@ -101,6 +101,12 @@ export class AStar { // returns an array of Tiles for the character to navigate.
         if (neighbor.isBlocked || searched.map((pathTile: PathTile) => pathTile.tile).includes(neighbor)) {
           continue;
         }
+
+        // Skip this neighbor if this is a diagonal movement and both tiles surrounding the path are blocked
+        const isDiagonal = current.tile.x !== neighbor.x && current.tile.y !== neighbor.y;
+        if (isDiagonal && this.grid.tileAt(current.tile.x, neighbor.y).isBlocked && this.grid.tileAt(neighbor.x, current.tile.y).isBlocked) {
+          continue;
+        }
         
         const indexInQueue = queue.find((pathTile: PathTile) => pathTile.tile === neighbor);
         if (indexInQueue > 0) { /* If the queue contains the neighbor */
@@ -124,7 +130,7 @@ export class AStar { // returns an array of Tiles for the character to navigate.
     };
   }
   
-  protected updatePathTile(current: PathTile, neighbor: Tile, queuedNeighbor: PathTile): boolean {
+  protected updatePathTile(current: PathTile, neighbor: Tile, queuedNeighbor: PathTile): boolean { // Takes neighbor just to match the arguments with the methods in descendant classes
     /* Updates the path tile's properties if the current path is more efficient than
     the queued one. Returns true if the path tile is updated and false otherwise. */
     if (queuedNeighbor.calculateCumulativeWeight(current) < queuedNeighbor.cumulativeWeight) {
@@ -135,20 +141,13 @@ export class AStar { // returns an array of Tiles for the character to navigate.
   }
   
   private constructPath(end: PathTile): Tile[] {
-    /* Once reaching the end node, we can ignore all other paths and 
-    terminate. Since Array.unshift takes more time than Array.push,
-    construct a backwards array and then have the Character read it
-    backwards. */
     const path: Tile[] = [];
     let current: PathTile = end;
     while (current.parent) {
       path.push(current.tile);
       current = current.parent;
     }
-    return path.reverse(); // TODO: Should it include the starting tile?
-    
-    // Benchmarks for reversing an array if we return a reversed array
-    // https://jsperf.com/js-array-reverse-vs-while-loop/5
+    return path.reverse();
   }
   
 }

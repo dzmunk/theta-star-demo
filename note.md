@@ -1,6 +1,6 @@
 # Todo
 
-- Smartphones
+- Smartphones (Check the behavior on iPhone)
 - Embed
 
 # Component Structure
@@ -20,8 +20,8 @@
       <TileLegend>
         Plain
         Blocked
-        In open list
-        In closed list
+        In the open list
+        In the closed list
       <ButtonContainer>
         Start
         Clear path
