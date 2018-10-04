@@ -53,8 +53,8 @@ class PathFinder extends React.Component<{}, PathFinderState> {
     // Copy the old block's properties
     for (let x = 0; x < Math.min(this.state.grid.x, xSize); x++) {
       for (let y = 0; y < Math.min(this.state.grid.y, ySize); y++) {
-        newGrid.tileAt(x, y).isBlocked = this.state.grid.tileAt(x, y).isBlocked;
-        newGrid.tileAt(x, y).weight = this.state.grid.tileAt(x, y).weight;
+        newGrid.tileAt(x, y)!.isBlocked = this.state.grid.tileAt(x, y)!.isBlocked;
+        newGrid.tileAt(x, y)!.weight = this.state.grid.tileAt(x, y)!.weight;
       }
     }
 
@@ -78,8 +78,8 @@ class PathFinder extends React.Component<{}, PathFinderState> {
   }
 
   private updateTile = (tile: Tile, isBlocked: boolean, weight: number) => {
-    this.state.grid.tileAt(tile.x, tile.y).isBlocked = isBlocked;
-    this.state.grid.tileAt(tile.x, tile.y).weight = weight;
+    this.state.grid.tileAt(tile.x, tile.y)!.isBlocked = isBlocked;
+    this.state.grid.tileAt(tile.x, tile.y)!.weight = weight;
     this.forceUpdate();
   }
 

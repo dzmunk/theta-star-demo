@@ -60,8 +60,8 @@ export class Grid {
     }
   }
   
-  public tileAt(x: number, y: number): Tile {
-    // TODO: Return null when the index is out of bound
+  public tileAt(x: number, y: number): Tile | null {
+    if (x >= this.x || y >= this.y) return null;
     return this.tiles[y][x];
   }
   
@@ -73,35 +73,35 @@ export class Grid {
     
     // West
     if (tile.x - 1 >= 0) {
-      tile.neighbors.set(Direction.West, this.tileAt(tile.x - 1, tile.y));
+      tile.neighbors.set(Direction.West, this.tileAt(tile.x - 1, tile.y)!);
     }
     // East
     if (tile.x + 1 < this.x) {
-      tile.neighbors.set(Direction.East, this.tileAt(tile.x + 1, tile.y));
+      tile.neighbors.set(Direction.East, this.tileAt(tile.x + 1, tile.y)!);
     }
     // North
     if (tile.y - 1 >= 0) {
-      tile.neighbors.set(Direction.North, this.tileAt(tile.x, tile.y - 1));
+      tile.neighbors.set(Direction.North, this.tileAt(tile.x, tile.y - 1)!);
     }
     // Northwest
     if (tile.neighbors.has(Direction.West) && tile.neighbors.has(Direction.North)) {
-      tile.neighbors.set(Direction.Northwest, this.tileAt(tile.x - 1, tile.y - 1));
+      tile.neighbors.set(Direction.Northwest, this.tileAt(tile.x - 1, tile.y - 1)!);
     }
     // Northeast
     if (tile.neighbors.has(Direction.East) && tile.neighbors.has(Direction.North)) {
-      tile.neighbors.set(Direction.Northeast, this.tileAt(tile.x + 1, tile.y - 1));
+      tile.neighbors.set(Direction.Northeast, this.tileAt(tile.x + 1, tile.y - 1)!);
     }
     // South
     if (tile.y + 1 < this.y) {
-      tile.neighbors.set(Direction.South, this.tileAt(tile.x, tile.y + 1));
+      tile.neighbors.set(Direction.South, this.tileAt(tile.x, tile.y + 1)!);
     }
     // Southwest
     if (tile.neighbors.has(Direction.West) && tile.neighbors.has(Direction.South)) {
-      tile.neighbors.set(Direction.Southwest, this.tileAt(tile.x - 1, tile.y + 1));
+      tile.neighbors.set(Direction.Southwest, this.tileAt(tile.x - 1, tile.y + 1)!);
     }
     // Southeast
     if (tile.neighbors.has(Direction.East) && tile.neighbors.has(Direction.South)) {
-      tile.neighbors.set(Direction.Southeast, this.tileAt(tile.x + 1, tile.y + 1));
+      tile.neighbors.set(Direction.Southeast, this.tileAt(tile.x + 1, tile.y + 1)!);
     }
   }
   

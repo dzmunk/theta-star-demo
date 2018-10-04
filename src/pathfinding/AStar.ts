@@ -104,19 +104,19 @@ export class AStar { // returns an array of Tiles for the character to navigate.
 
         // Skip this neighbor if this is a diagonal movement and both tiles surrounding the path are blocked
         const isDiagonal = current.tile.x !== neighbor.x && current.tile.y !== neighbor.y;
-        if (isDiagonal && this.grid.tileAt(current.tile.x, neighbor.y).isBlocked && this.grid.tileAt(neighbor.x, current.tile.y).isBlocked) {
+        if (isDiagonal && this.grid.tileAt(current.tile.x, neighbor.y)!.isBlocked && this.grid.tileAt(neighbor.x, current.tile.y)!.isBlocked) {
           continue;
         }
         
         const indexInQueue = queue.find((pathTile: PathTile) => pathTile.tile === neighbor);
         if (indexInQueue > 0) { /* If the queue contains the neighbor */
-          const updated = this.updatePathTile(current, neighbor, queue.elementAt(indexInQueue)!);
+          const updated = this.updatePathTile(current, queue.elementAt(indexInQueue)!);
           updated && queue.notifyUpdate(indexInQueue);
         } else {
           // TODO: やばいきたない
           queue.enqueue(new PathTile(neighbor, current, end));
           const indexInQueueue = queue.find((pathTile: PathTile) => pathTile.tile === neighbor);
-          const updated = this.updatePathTile(current, neighbor, queue.elementAt(indexInQueueue)!);
+          const updated = this.updatePathTile(current, queue.elementAt(indexInQueueue)!);
           updated && queue.notifyUpdate(indexInQueueue);
         }
       }
@@ -130,7 +130,7 @@ export class AStar { // returns an array of Tiles for the character to navigate.
     };
   }
   
-  protected updatePathTile(current: PathTile, neighbor: Tile, queuedNeighbor: PathTile): boolean { // Takes neighbor just to match the arguments with the methods in descendant classes
+  protected updatePathTile(current: PathTile, queuedNeighbor: PathTile): boolean {
     /* Updates the path tile's properties if the current path is more efficient than
     the queued one. Returns true if the path tile is updated and false otherwise. */
     if (queuedNeighbor.calculateCumulativeWeight(current) < queuedNeighbor.cumulativeWeight) {

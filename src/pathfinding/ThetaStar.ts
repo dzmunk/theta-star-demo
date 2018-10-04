@@ -18,13 +18,13 @@ export class ThetaStar extends AStar {
   }
   
   // Override
-  protected updatePathTile(current: PathTile, neighbor: Tile, queuedNeighbor: PathTile): boolean {
+  protected updatePathTile(current: PathTile, queuedNeighbor: PathTile): boolean {
     /* Updates the path tile's properties if the current path is more efficient than
     the queued one. Returns true if the path tile is updated and false otherwise. */
     
     /* Path 2 (longer) */
     if (current.parent) {
-      const lineTiles = this.lineOfSight(current.parent.tile, neighbor);
+      const lineTiles = this.lineOfSight(current.parent.tile, queuedNeighbor.tile);
       if (lineTiles) { // There is a line-of-sight
         if (queuedNeighbor.calculateAnyAngleCumulativeWeight(current.parent, lineTiles) < queuedNeighbor.cumulativeWeight) {
           queuedNeighbor.updatePathToThis(current.parent);
@@ -84,25 +84,25 @@ export class ThetaStar extends AStar {
     let error = -deltaErrorHalf; // Distance between the center of the tile and the ideal line
     
     while (current[primaryAxis] !== destination[primaryAxis] + direction[primaryAxis]) {
-      if (this.grid.tileAt(current[Axis.X], current[Axis.Y]).isBlocked) {
+      if (this.grid.tileAt(current[Axis.X], current[Axis.Y])!.isBlocked) {
         return null;
       }
       
       error += deltaErrorHalf; // Error at the center of the tile
       if (error < 0.5) {
-        tiles.push(this.grid.tileAt(current[Axis.X], current[Axis.Y]));
+        tiles.push(this.grid.tileAt(current[Axis.X], current[Axis.Y])!);
       } else {
         tiles.push(this.grid.tileAt(
           primaryAxis === Axis.X ? current[Axis.X] : (current[Axis.X] + direction[Axis.X]),
           primaryAxis === Axis.X ? (current[Axis.Y] + direction[Axis.Y]) : current[Axis.Y]
-        ));
+        )!);
       }
       
       error += deltaErrorHalf; // Error at the end of the tile
       if (error >= 0.5) {
         current[secondaryAxis] += direction[secondaryAxis];
         if (error > 0.5) {
-          if (this.grid.tileAt(current[Axis.X], current[Axis.Y]).isBlocked) {
+          if (this.grid.tileAt(current[Axis.X], current[Axis.Y])!.isBlocked) {
             return null;
           }
         }
